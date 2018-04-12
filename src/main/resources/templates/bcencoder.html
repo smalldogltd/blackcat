@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BlackCat Tech Test: RLE Encoder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Montserrat:400,500,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://blackcatsolutions.co.uk/content/themes/blackcat-2015/components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="https://blackcatsolutions.co.uk/content/themes/blackcat-2015/style.css">
+
+</head>
+<body>
+<h2>BlackCat Tech Test: RLE Encoder</h2>
+<p>Use the forms below to encode or decode strings using simple Run Length encoding. Each repeated sequence of characters longer than 5 will
+    be consecutively encoded as {[character];[occurrences]} e.g. the string "WOOOOOOWWW" will encode to "W{O;6}WWW" - see original <a href="RLESpec.pdf">requirements document</a></p>
+<form action="#" th:action="@{/bcencoder}" th:object="${encodeText}" method="post" style="width: 500px">
+    <p>Plain text to be encoded: <input type="text" th:field="*{decodedText}" /></p>
+    <p><input type="submit" value="Encode" /> </p>
+</form>
+
+<form action="#" th:action="@{/bcdecoder}" th:object="${encodeText}" method="post" style="width: 500px">
+    <p>Text to be decoded: <input type="text" th:field="*{encodedText}" /></p>
+    <p><input type="submit" value="Decode" /></p>
+</form>
+
+</body>
+</html>
