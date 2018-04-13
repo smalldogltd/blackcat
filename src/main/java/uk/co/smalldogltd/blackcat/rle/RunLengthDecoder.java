@@ -1,8 +1,17 @@
 package uk.co.smalldogltd.blackcat.rle;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Simple implementation of the Decoder interface to unpack encoded character sequences where required - find each pattern
+ * of {[character];[occurrences]} and unpack to its original form with the specified character repeated the specified
+ * number of times e.g. the string "W{O;6}WWW" will decode to "WOOOOOOWWW"
+ *
+ * @author Paul Davis
+ * @version 0.1
+ */
 public class RunLengthDecoder implements Decoder {
 
     /**
@@ -20,11 +29,12 @@ public class RunLengthDecoder implements Decoder {
         // then semi-colon as the delimiter between the character and number of reps, followed by number of reps
         Pattern pattern = Pattern.compile("([^\\{]+)?\\{([^\\;])\\;([0-9]+)\\}([^\\{]+)?");
         Matcher matcher = pattern.matcher(encodedText);
-        String unencodedText = "";
         while (matcher.find()) {
             appendUnencodedText(plainText, matcher.group(1));
-            int number = Integer.parseInt(matcher.group(3));
-            while (number-- != 0) {
+            // find out how many of the character we have in the match
+            int runLength = Integer.parseInt(matcher.group(3));
+            // add that many iterations of the character to the plaintext
+            for (int i = 0; i < runLength; i++) {
                 plainText.append(matcher.group(2));
             }
             appendUnencodedText(plainText, matcher.group(4));

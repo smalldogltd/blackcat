@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Spring Controller class to handle display and submission of form template - on submit to
  * the encode/decode endpoints, invokes the appropriate encode or decode and sets the encoded
  * and decoded text in the model object for display in the results page
+ *
+ * @author Paul Davis
+ * @version 0.1
  */
 @Controller
 public class RLEController {
